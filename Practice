@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// https://www.hackerrank.com/challenges/2d-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
+// Complete the hourglassSum function below.
+int hourglassSum(vector<vector<int>> arr) {
+    int highestval = 0;
+    int total;
+    int z = 0;
+    for(int i = 0; i <= 3; i++) {
+        for(int j = 0; j <= 3; j++){
+            // loop through as many hour glasses can be made
+            total = 0; // restart total
+            int k = i;
+            int l = j; // duplicate variables to not override loop
+            total += arr[k][l];  // top left
+            total += arr[k][l+1]; // top middle
+            total += arr[k][l+2]; // top right
+            total += arr[k+1][l+1]; // middle
+            total += arr[k+2][l]; // bottom left
+            total += arr[k+2][l+1]; // bottom middle
+            total += arr[k+2][l+2]; // bottom right
+            // adds all values in shape
+            if (z == 0){
+                if(highestval == 0){
+                    highestval = total;
+                    z += 1;
+                }
+            }
+            if (total > highestval)
+                highestval = total;
+            cout << "hour glass at " << i << ", " << j << " equals " << total << endl;
+        }
+    }
+    return highestval;
+
+}
