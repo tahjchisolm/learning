@@ -1,3 +1,4 @@
+// ADTs - lists, stack, queue
 #include <iostream>
 include namespace std;
 
@@ -56,3 +57,16 @@ vect.swap();         // swap content of one vector to another of same type, size
 vect.clear();        // used to remove all elements of the vector container
 vect.emplace();      // extends container by inserting new element at position
 vect.emplace_back(); // used to append new element
+
+
+// Linked List
+
+stuct Node {  // constructing linked list node
+int data;
+struct Node *next;
+}
+
+Node* head = NULL; // create node
+head->data = 1; // assign data in head node
+
+
