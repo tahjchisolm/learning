@@ -1,3 +1,6 @@
+#include <iostream>
+include namespace std;
+
 // Arrays
 // type name [elements];
 
@@ -10,3 +13,46 @@ x = arr[4];
 int 2D_arr[3][5]; // initializing 2D array
 
 // begin, end, size, empty, front, back, swap
+
+
+// Vectors
+#include <vector>
+g = 1;
+vector<int> vect; // initializing
+
+// iterators
+vect.begin();   // returns iterator pointing to the first element
+vect.end();     // returns iterator pointing to the theoretical element that follows the last element
+vect.rbegin();  // returns reverse iterator pointing to last element
+vect.rend();    // returns reverse iterator pointing to theortical element preceding first element
+vect.cbegin();  // c = constant iterator
+vect.cend();   
+vect.crbegin(); // cr = constant reverse iterator
+vect.crend();   // considered as reverse end
+
+// capacity
+vect.size();          // returns numbers of elements
+vect.max_size();      // returns mx number of elements vector can hold
+vect.capacity();      // returns size of storage space currently allocated to the vector
+vect.resize();        // resize the container so that is contains 'g' elements
+vect.empty();         // returns whether container is empty
+vect.shrink_to_fit(); // reduces capacity of the container to fit its size, destroys rest 
+vect.reserve();       // requests vector capacity to be at least enough to contain n elements
+
+// element access
+vect[g];      // returns reference to the element at position 'g'
+vect.at(g);   // returns reference to the element at position 'g'
+vect.front(); // returns reference to the first element
+vect.back();  // returns reference to the last element
+vect.data();  // return direct point to the memory array used internally by the vector
+
+// modifiers
+vect.assign();       // assigns new value to the vector elements, replacing old
+vect.push_back();    // pushses the elements into a vector from the back
+vect.pop_back();     // pops/removes elements from a vector from th eback
+vect.insert();       // inserts new elements before the element at the specified position
+vect.erase();        // remove elements from a container from specified position or range
+vect.swap();         // swap content of one vector to another of same type, sizes may differ
+vect.clear();        // used to remove all elements of the vector container
+vect.emplace();      // extends container by inserting new element at position
+vect.emplace_back(); // used to append new element
