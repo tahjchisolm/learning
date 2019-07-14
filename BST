@@ -1,0 +1,116 @@
+#include <iostream>
+using namespace std;
+
+class Node  {   // node has key, left and right child
+    public: 
+    int key;  
+    node *left;  
+    node *right;  
+};
+
+node* newNode (int key)  // create new node
+{  
+    node* temp = new node(); 
+  
+    temp->data = key;  
+    temp->left = temp->right = NULL;  
+  
+    return temp;  
+}  
+
+
+BSTSearch (tree, key) { // searching for a key
+  curr = tree->root;
+  while (curr is not null) {
+    if (key == curr->key)
+      return curr // Found
+    else if (key < curr->key) // go left if the key is less
+      curr = curr->left;
+    else // go right if the key is greater
+      curr = curr->right
+    }
+  return null // key isn't in the tree if loop is finished
+}
+
+BSTInsert (tree, node) { // inserting a node
+  if (tree->root is null) {  // tree is empty
+    tree->root = node;
+    node->left = null;
+    node->right = null;
+  }
+  else { // tree isn't empty
+    curr = tree->root;
+    while (curr is not null) {
+     if (node->key < cur->key) { // go right if node is less that current
+        if (curr->left is null) { // insert on left if there isn't a child
+          curr->left = node;
+          curr = null; }
+        else  
+          curr = curr->left; }
+     else { // if node is greater than OR equal to current, go right
+        if (curr->right is null) { // insert on right if there isn't a child
+          curr->right = node;
+          curr = null; }
+        else
+          curr = curr->right;
+      }
+     }
+     node->left = null;    // create left and right children nodes (empty)
+     node->right = null;
+}
+
+BSTRemove(tree, key) {
+   par = null
+   cur = tree->root
+   while (cur is not null) { // Search for node
+      if (cur->key == key) { // Node found 
+         if (!cur->left && !cur->right) {        // Remove leaf
+            if (!par) // Node is root
+               tree->root = null
+            else if (par->left == cur) 
+               par->left = null
+            else
+               par->right = null
+         }
+         else if (cur->left && !cur->right) {    // Remove node with only left child
+            if (!par) // Node is root
+               tree->root = cur->left
+            else if (par->left == cur) 
+               par->left = cur->left
+            else
+               par->right = cur->left
+         }
+         else if (!cur->left && cur->right) {    // Remove node with only right child
+            if (!par) // Node is root
+               tree->root = cur->right
+            else if (par->left == cur) 
+               par->left = cur->right
+            else
+               par->right = cur->right
+         }
+         else {                                  // Remove node with two children
+            // Find successor (leftmost child of right subtree)
+            suc = cur->right
+            while (suc->left is not null)
+               suc = suc->left
+            successorData = Create copy of suc's data
+            BSTRemove(tree, suc->key)     // Remove successor
+            Assign cur's data with successorData
+         }
+         return // Node found and removed
+      }
+      else if (cur->key < key) { // Search right
+         par = cur
+         cur = cur->right
+      }
+      else {                     // Search left
+         par = cur
+         cur = cur->left
+      }
+   }
+   return // Node not found
+}
+
+
+
+
