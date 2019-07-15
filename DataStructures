@@ -156,7 +156,74 @@ ListSearch(list, key) {
 
 // Linked List (doubly)
 
+stuct Node {  // each node has data and pointers to the next and prev node
+int data;
+struct Node *next;
+struct Node *prev;
+} 
 
+ListAppend(list, newNode) {
+   if (list->head == null) { // list is empty
+      list->head = newNode
+      list->tail = newNode
+   }
+   else {
+      list->tail->next = newNode
+      newNode->prev = list->tail
+      list->tail = newNode
+   }
+}
 
+ListPrepend(list, newNode) {
+   if (list->head == null) { // list is empty
+      list->head = newNode
+      list->tail = newNode
+   }
+   else {
+      newNode->next = list->head
+      list->head->prev = newNode
+      list->head = newNode
+   }
+}
+
+ListInsertAfter(list, curNode, newNode) {
+   if (list->head == null) { // List empty
+      list->head = newNode
+      list->tail = newNode
+   }
+   else if (curNode == list->tail) { // Insert after tail
+      list->tail->next = newNode
+      newNode->prev = list->tail
+      list->tail = newNode
+   }
+   else {
+      sucNode = curNode->next
+      newNode->next = sucNode
+      newNode->prev = curNode
+      curNode->next = newNode
+      sucNode->prev = newNode
+   }
+}
+
+ListRemove(list, curNode) {
+   sucNode = curNode->next
+   predNode = curNode->prev
+
+   if (sucNode is not null) {
+      sucNode->prev = predNode
+   }
+
+   if (predNode is not null) {
+      predNode->next = sucNode
+   }
+
+   if (curNode == list->head) { // Removed head
+      list->head = sucNode
+   }
+
+   if (curNode == list->tail) { // Removed tail
+      list->tail = predNode
+   }
+}
 
 
