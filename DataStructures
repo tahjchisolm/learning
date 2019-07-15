@@ -59,14 +59,104 @@ vect.emplace();      // extends container by inserting new element at position
 vect.emplace_back(); // used to append new element
 
 
-// Linked List
+// List
 
-stuct Node {  // constructing linked list node
+// operations
+Append(list, x);
+Prepend(list, x);
+InsertAfter(list, w, x);
+Remove(list, x);
+Search(list, x);
+Print(list);
+PrintReverse(list);
+Sort(list);
+IsEmpty(list);
+GetLength(list);
+
+
+// Linked List (singly)
+// type of a positional list
+
+stuct Node {  // each node has data and a pointer to the next node
 int data;
 struct Node *next;
-}
+} 
 
+// typically have pointers to the first node(head) and last node(tail)
 Node* head = NULL; // create node
 head->data = 1; // assign data in head node
+
+ListAppend(list, newNode) {
+   if (list->head == null) { // list is empty
+      list->head = newNode;
+      list->tail = newNode;
+   }
+   else{
+      list->tail->next = newNode; // old tail now points to node
+      list->tail = newNode; // new node is new tail
+   }
+}
+
+ListPrepend(list, newNode) {
+   if (list->head == null) { // list is empty
+      list->head = newNode;
+      list->tail = newNode;
+   }
+   else {
+      newNode->next = list->head; // new node points to old head
+      list->head = newNode; // new node is new head
+   }
+}
+
+ListInsertAfter(list, curNode, newNode) {
+   if (list->head == null) { // list is empty
+      list->head = newNode;
+      list->tail = newNode;
+   }
+   else if (curNode == list->tail) { // insert after tail, same as append
+      list->tail->next = newNode;
+      list->tail = newNode;
+   }
+   else {
+      newNode->next = curNode->next; // new node points at whatever current was at the time
+      curNode->next = newNode; // current now points at new node
+   }
+}
+
+ListRemoveAfter(list, curNode) { // deletes node after curNode
+   // special case, remove head
+   if (curNode is null && list->head is not null) {
+      sucNode = list->head->next;
+      list->head = sucNode;
+
+      if (sucNode is null) { // removed last item
+         list->tail = null;
+      }
+   }
+   else if (curNode->next is not null) {
+      sucNode = curNode->next->next;
+      curNode->next = sucNode;
+
+      if (sucNode is null) { // remove tail
+         list->tail = curNode;
+      }
+   }
+}
+
+ListSearch(list, key) {
+   curNode = list->head;
+   while (curNode is not null) {
+      if (curNode->data == key) {
+         return curNode;
+      }
+      curNode = curNode->next;
+   }
+   return null;  // returns null if not found
+}
+
+// Linked List (doubly)
+
+
+
 
 
