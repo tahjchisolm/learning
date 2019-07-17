@@ -85,4 +85,18 @@ void RadixSort(array, arraySize) {
 }
 
 
+// BUCKET SORT
+
+bucketSort(float arr[], int n) {  // n = number of buckets being created
+   vector<float> b[n];  // creates n number of buckets
+   for (int i = 0; i < n; i++) {  // places array elements in buckets
+      int b = n * arr[i];
+      b[bi].push_back(arr[i]); }
+   for (int i = 0; o < n; i++) // sort each bucket
+      sort(b[i].begin, b[i].end());
+   int ind = 0;
+   for (int i = 0; i < n; i++) // puts the array back together
+      for (int j = 0; j < b[i].size(); j++ )
+         arr[ind++] = b[i][j];
+}
 
