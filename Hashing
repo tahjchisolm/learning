@@ -1,0 +1,104 @@
+#include <cstdlib>
+#include <string>
+#include <iostream>
+using namespace std;
+
+
+// header file
+// #ifndef HASH_H
+// #define HASH_H
+
+class hash {
+  private:
+    static const int tableSize = 10;  // size of table being used, method to be able to use w/o initializing
+    
+    struct item {    // custom info we are storing in each item
+      string name;
+      string drink;
+      item* next
+    };
+
+    item* HashTable[tableSize]; 
+
+  public:
+    hash() {
+      for (int i = 0; i < tableSize; i++) {  // initializes entire hash table with "empty" values and null pointers
+        HashTable[i] = new item; // pointers point at newly created item
+        HashTable[i]->name = "empty";
+        HashTable[i]->drink = "empty";
+        HashTable[i]->next = NULL;
+      }
+    }
+    int Hash(string key);  // string taken and converted to int to form hash value for hash index
+    void AddItem(string name, string drink);
+    int NumberOfItemsInIndex(int index);
+
+};
+
+
+
+// #endif HASH_H
+
+// class file
+// #include "hash.h"
+
+int hash::Hash(string key) {
+  // divide vaue by table size and remainder is the index, or bucket moreso
+  // you can use type casting to convert chars to their ASCII value
+  int hash = 0;
+  int index;
+  
+  for (int i = 0; i < key.length(); i++) {
+    hash += (int)key[i]; // type casting
+  }
+  
+  index = hash % tableSize; // % modulo takes remainder which signifies index 
+  
+  return index;
+}
+
+void hash::AddItem(string name, string drink) {
+  int index = Hash(name);  // return bucket to be stored in
+  if(HashTable[index]->name == "empty) { // still default
+    HashTable[i]->name = name;
+    HashTable[i]->drink = drink;
+  }
+  else { // already overwritten
+    item* Ptr = HashTable[index]; // points to the beginning of index
+    item* n = new item;  // pointer for new item being added
+    n->name = name;
+    n->drink = drink;
+    n->next = NULL;
+    while(Ptr->next != NULL){ // traverse list until at the end
+      Ptr = Ptr->next; 
+    }
+    Ptr->next = n; // end now points to the newly created item
+  }
+}
+
+int hash::NumberOfItemsInIndex(int index) {
+  int count = 0;
+  
+  if(HashTable[index]->name == "empty") // nothing is in the bucket, same value set by constructor
+    return count;
+  else {
+    count++;
+    item* Ptr = HashTable[index]; // point to beginning of list
+    while(Ptr->next != NULL) { // traverse list until at the end
+      Ptr = Ptr->next;
+      count++;
+    }
+  }
+
+}
+
+
+
+
+// main cpp
+// #include "hash.h"
+
+int main () {
+   
+  
+  }
