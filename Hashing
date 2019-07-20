@@ -11,6 +11,7 @@ using namespace std;
 class hash {
   private:
     static const int tableSize = 10;  // size of table being used, method to be able to use w/o initializing
+    // may be modified to make storing more objects easier, avoiding collisions
     
     struct item {    // custom info we are storing in each item
       string name;
@@ -32,6 +33,9 @@ class hash {
     int Hash(string key);  // string taken and converted to int to form hash value for hash index
     void AddItem(string name, string drink);
     int NumberOfItemsInIndex(int index);
+    void PrintTable();
+    void PrintItemsInIndex(int index);
+    void FindDrink(string name);
 
 };
 
@@ -51,7 +55,7 @@ int hash::Hash(string key) {
   for (int i = 0; i < key.length(); i++) {
     hash += (int)key[i]; // type casting
   }
-  
+  // may change calculations to make indices more unique
   index = hash % tableSize; // % modulo takes remainder which signifies index 
   
   return index;
@@ -92,6 +96,51 @@ int hash::NumberOfItemsInIndex(int index) {
 
 }
 
+void hash::PrintTable() {
+  int number; // hold numbers of elements in each bucket
+  
+  for(int i = 0; i < tableSize; i++) {  // represent bucket being seen
+    number = NumberOfItemsInIndex(i);
+    cout << endl << "index = " << i << endl;
+    cout << HashTable[i]->name << endl;
+    cout << HashTable[i]->drink << endl;
+    cout << "# of items = " << number << endl;
+  }
+}
+
+void hash::PrintItemsInIndex(int index) {
+  item* Ptr = HashTable[index];
+  if(Ptr->name == "empty")
+    cout << "Bucket " << index << " is empty." << endl;
+  else {
+    cout << "Bucket " << index << " contains:" << endl;
+    while(Ptr != NULL) {
+      cout << Ptr->name << endl;
+      cout << Ptr->drink << endl << endl;
+      Ptr = Ptr->next; 
+    }
+  }
+}
+
+void hash::FindDrink(string name){
+  int index = Hash(name); // returns index of where hash value should be
+  bool foundName = false;
+  string drink;
+  
+  item* Ptr = HashTable[index]; // points to first item in bucket
+  while(Ptr != NULL) {
+    if (Ptr->name == name) {  // name found
+      foundName = true;
+      drink == Ptr->drink;
+    }
+    Ptr = Ptr->next;
+  }
+  if (foundName == true)
+    cout << "Favorite drink = " << drink << endl;
+  else
+    cout << name << "'s info was not found in the Table" << endl;
+  
+}
 
 
 
@@ -100,5 +149,12 @@ int hash::NumberOfItemsInIndex(int index) {
 
 int main () {
    
+  hash HashObj;
+  HashObj.PrintTable(); // should print 'empty' for all buckets
   
+  // you may test by adding a bunch of names and drinks
+  HashObj.AddItem("Tahj", "Water");
+  
+  
+  return 0;
   }
